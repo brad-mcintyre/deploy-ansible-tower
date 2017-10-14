@@ -1,6 +1,6 @@
 ---
 
-- src: git+https://azure-nagios.ds.acc.co.nz/config-genie/acc-roles/tower-roles.git
+- src: git+https://github.com/brad-mcintyre/tower-roles.git
   scm: git
   version: development
   name: tower-roles
