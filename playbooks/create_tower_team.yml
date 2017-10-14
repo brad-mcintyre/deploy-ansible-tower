@@ -1,0 +1,13 @@
+---
+#################################################
+## Playbook to create Ansible Tower Team
+#################################################
+- name: Create Ansible Tower Team
+  hosts: tower_servers_sydney
+  gather_facts: true
+  become: yes
+
+
+  roles:
+
+    - role: tower-roles/create-team

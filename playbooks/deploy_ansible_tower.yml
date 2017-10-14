@@ -1,0 +1,18 @@
+---
+#################################################
+## Playbook to deploy Ansible Tower
+#################################################
+- name: Deploy Ansible Tower
+  hosts: tower_servers_sydney
+  gather_facts: True
+  become: yes
+
+
+  roles:
+
+     - role: tower-roles/install-tower-prereqs
+     - role: tower-roles/install-tower
+    #- role: tower-roles/create-organisation
+    #- role: tower-roles/create-team
+    #- role: tower-roles/create-inventory
+   # - role: tower-roles/configure-tower

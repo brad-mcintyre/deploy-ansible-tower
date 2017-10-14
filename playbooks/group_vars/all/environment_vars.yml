@@ -1,0 +1,8 @@
+---
+
+# Common environment variables
+
+site: azure # azure / onprem
+
+binarysource_servername: azulnx5001
+binarysource_repository: Datacom

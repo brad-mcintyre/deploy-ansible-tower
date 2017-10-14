@@ -1,0 +1,12 @@
+---
+#################################################
+## Playbook to create Ansible Tower Project
+#################################################
+- name: Create Ansible Tower Project
+  hosts: tower_servers_sydney
+  gather_facts: yes
+  become: true
+
+  roles:
+
+    - role: tower-roles/create-project

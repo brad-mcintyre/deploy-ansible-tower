@@ -1,0 +1,211 @@
+---
+
+tower_version: 3.2.0
+
+tower_toweradmin_user_name: toweradmin
+tower_ldap_port: 636
+tower_ldap_domain: ds.acc.co.nz
+tower_ldap_domain_dn: DC=DS,DC=ACC,DC=CO,DC=NZ
+tower_ldap_admin_group: Tower Admin Team
+tower_ldap_admin_group_path: OU=Security Groups,OU=Secure Groups,OU=Delegation
+tower_organisation_name: ACC
+tower_organisation_description: ACC Organisation
+tower_team_unix_admins: "Tower Unix Admin Team"
+tower_team_unix_admins_ldap_path: OU=Security Groups,OU=Secure Groups,OU=Delegation
+tower_team_unix_operate: "Tower Unix Operate Team"
+tower_team_unix_opearate_ldap_path: OU=Security Groups,OU=Secure Groups,OU=Delegation
+tower_team_windows_admins: "Tower Windows Admin Team"
+tower_team_windows_admins_ldap_path: OU=Security Groups,OU=Secure Groups,OU=Delegation
+tower_team_windows_opearate: "Tower Windows Operate Team"
+tower_team_windows_operate_ldap_path: OU=Security Groups,OU=Secure Groups,OU=Delegation
+
+
+tower_yum_packages:
+  - epel-release
+  - python-pip
+  - gcc
+  - libffi-devel
+  - python-devel
+  - openssl-devel
+  - krb5-devel
+  - krb5-workstation
+
+tower_pip_packages:
+  - ansible-tower-cli
+  - pywinrm
+  - pywinrm[kerberos]
+  - requests-credssp
+  - requests-kerberos
+  - azure==2.0.0rc5
+  - msrestazure
+
+tower_teams:
+  - tower_team_name: Tower Admin Team
+    tower_team_description: Tower Admin Team
+    tower_team_organisation: "{{ tower_organisation_name }}"
+  - tower_team_name: Unix Admin Team
+    tower_team_description: Unix Admin Team
+    tower_team_organisation: "{{ tower_organisation_name }}"
+  - tower_team_name: Windows Admin Team
+    tower_team_description: Windows Admin Team
+    tower_team_organisation: "{{ tower_organisation_name }}"
+  - tower_team_name: Unix Operate Team
+    tower_team_description: Unix Production Team
+    tower_team_organisation: "{{ tower_organisation_name }}"
+  - tower_team_name: Windows Operate Team
+    tower_team_description: Windows Production Team
+    tower_team_organisation: "{{ tower_organisation_name }}"
+
+tower_inventories:
+  - tower_inventory_name: Azure Ansible Tower Servers
+    tower_inventory_description: Azure Ansible Tower Servers
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: DE Project - Prod
+    tower_inventory_description: DE Project Inventory for Prod Environment
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: DE Project - Dev
+    tower_inventory_description: DE Project Inventory for Dev Environment
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: Juno Project - Dev - Adhoc
+    tower_inventory_description: JunoE Project Inventory for Dev Adhoc Environment
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: RHEL SOE Testing
+    tower_inventory_description: Inventory for RHEL SOE Testing
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: Windows SOE Testing
+    tower_inventory_description: Inventory for Windows SOE Testing
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: Analytics MapR - Dev
+    tower_inventory_description: Inventory for Analytics MapR - Dev
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: Windows Failover Cluster Testing
+    tower_inventory_description: Inventory for Windows failover cluster Testing
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: Windows SQL Cluster Testing
+    tower_inventory_description: Inventory for Windows SQL cluster Testing
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+  - tower_inventory_name: Control-m Testing
+    tower_inventory_description: Inventory for Control-m Testing
+    tower_inventory_organisation: "{{ tower_organisation_name }}"
+
+tower_credentials:
+  - tower_credential_name: Ansible RHEL Credential
+    tower_credential_description: "RHEL Account for Ansible connectivity"
+    tower_credential_organization: ACC
+    tower_credential_kind: ssh
+    tower_credential_username: ansibleadmin
+    tower_credential_password: ASK
+    tower_credential_vault_password: ASK
+    tower_credential_become_method: sudo
+    tower_credential_become_password: ASK
+
+tower_projects:
+  - tower_project_name: acc-tower-inventories
+    tower_project_description: Updates Inventories
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: https://azure-nagios.ds.acc.co.nz/config-genie/datacom-projects/acc-tower-inventories.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+  - tower_project_name: deploy-ansible-tower
+    tower_project_description: Installs and configures Ansible Tower
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: https://azure-nagios.ds.acc.co.nz/config-genie/datacom-projects/deploy-ansible-tower.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+  - tower_project_name: rhel-configure-soe
+    tower_project_description: RHEL SOE Configuration
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: https://azure-nagios.ds.acc.co.nz/config-genie/datacom-projects/rhel-configure-soe.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+  - tower_project_name: windows-configure-soe
+    tower_project_description: Deploys Windows SOE roles
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: https://azure-nagios.ds.acc.co.nz/config-genie/datacom-projects/windows-configure-soe.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+  - tower_project_name: azure-deploy-single-vm-dev
+    tower_project_description: Deploy Azure VM from ARM Template
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: https://azure-nagios.ds.acc.co.nz/config-genie/datacom-projects/azure-deploy-single-vm-dev.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+  - tower_project_name: deploy-control-m
+    tower_project_description: Deploys the control-m agent
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: https://azure-nagios.ds.acc.co.nz/config-genie/adhoc-tasks/deploy-control-m.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+  - tower_project_name: windows-failover-cluster
+    tower_project_description: Deploys a WIndows failover cluster
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: https://azure-nagios.ds.acc.co.nz/config-genie/datacom-projects/windows-failover-cluster.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+  - tower_project_name: windows-sql-cluster
+    tower_project_description: Install a Windows SQL Cluster
+    tower_project_organisation: ACC
+    tower_project_scm_type: git
+    tower_project_scm_url: http://azure-nagios.ds.acc.co.nz/config-genie/acc-roles/sql-server.git
+    tower_project_scm_branch: development
+    tower_project_scm_credential: Gitlab Credential
+    tower_project_scm_delete_on_update: true
+    tower_project_scm_update_on_launch: true
+    tower_project_scm_clean: true
+    tower_project_state: present
+
+
+tower_job_templates:
+  - tower_job_template_name: Deploy Azure VM
+    tower_job_template_description: Deploys an Azure VM
+    tower_job_template_inventory: Ansible_Tower_Servers
+    tower_job_template_project:  azure-deploy-single-vm-dev
+    tower_job_template_playbook: playbooks/deploy_vm.yml
+    tower_job_template_machine_credential: Tower Host Credential - Linux Tasks
+  - tower_job_template_name: RHEL Configure SOE
+    tower_job_template_description: Configures SOE on RHEL Servers
+    tower_job_template_ask_inventory: true
+    tower_job_template_project:  rhel-configure-soe
+    tower_job_template_playbook: playbooks/configure_soe.yml
+    tower_job_template_machine_credential: Ansible RHEL Credential
+  - tower_job_template_name: Azure Start VM
+    tower_job_template_description: Starts a VM in Azure
+    tower_job_template_inventory: Ansible_Tower_Servers
+    tower_job_template_project:  azure-deploy-single-vm-dev
+    tower_job_template_playbook: playbooks/start_vm.yml
+    tower_job_template_machine_credential: Tower Host Credential - Windows Tasks

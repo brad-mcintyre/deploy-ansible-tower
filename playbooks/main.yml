@@ -1,0 +1,6 @@
+---
+###################
+# main.yml playbook
+###################
+
+- include: deploy_ansible_tower.yml

@@ -1,0 +1,12 @@
+---
+#################################################
+## Playbook to create Ansible Tower Inventory
+#################################################
+- name: Create Ansible Tower Inventory
+  hosts: tower_servers_sydney
+  gather_facts: yes
+  become: true
+
+  roles:
+
+    - role: tower-roles/create-inventory
