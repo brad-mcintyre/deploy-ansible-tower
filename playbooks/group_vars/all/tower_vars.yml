@@ -21,7 +21,7 @@ tower_team_windows_operate_ldap_path: OU=Security Groups,OU=Secure Groups,OU=Del
 
 
 tower_yum_packages:
-  - epel-release
+  # - epel-release
   - python-pip
   - gcc
   - libffi-devel
