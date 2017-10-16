@@ -10,7 +10,7 @@
 
   roles:
 
-     # - role: tower-roles/install-tower-prereqs
+     - role: tower-roles/install-tower-prereqs
      - role: tower-roles/install-tower
     #- role: tower-roles/create-organisation
     #- role: tower-roles/create-team
